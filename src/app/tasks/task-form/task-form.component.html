@@ -1,0 +1,28 @@
+<div class="max-w-xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-4 text-gray-700">Thêm / Sửa Công Việc</h2>
+  <div class="back" (click)="backtoList()">⬅️</div>
+
+  <!-- <div *ngIf="authService.isLoggedIn(); else guest">
+    <button (click)="logout()" class="text-red-500">Đăng xuất</button>
+  </div>
+
+  <ng-template #guest>
+    <a routerLink="/login" class="text-blue-500">Bạn chưa đăng nhập</a>
+  </ng-template> -->
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="space-y-4 mt-4">
+    <input
+      type="text"
+      formControlName="title"
+      class="w-full px-4 py-2 border border-gray-300 rounded"
+      placeholder="Nhập tên công việc..."
+    />
+
+    <div class="flex gap-4">
+      <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+        Lưu
+      </button>
+      <a routerLink="/list" class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">Hủy</a>
+    </div>
+  </form>
+</div>

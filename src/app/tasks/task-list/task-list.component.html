@@ -1,0 +1,89 @@
+<div class="max-w-2xl mx-auto mt-10 px-4">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-700">Danh sách công việc</h2>
+
+    <!-- Avatar + Logout -->
+    <div class="relative" *ngIf="authService.isLoggedIn(); else guest">
+      <!-- Avatar -->
+      <div
+        class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center cursor-pointer select-none"
+        (click)="toggleProfileMenu()"
+        title="Tài khoản"
+      >
+        {{ getInitials() }}
+      </div>
+
+      <!-- Dropdown logout -->
+      <div
+        *ngIf="showProfileMenu"
+        class="absolute right-0 mt-2 w-32 bg-white border rounded shadow z-10"
+      >
+        <button
+          (click)="logout()"
+          class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+        >
+          Đăng xuất
+        </button>
+      </div>
+    </div>
+
+    <!-- Guest (chưa đăng nhập) -->
+    <ng-template #guest>
+      <a routerLink="/login" class="text-sm text-blue-500 hover:underline">
+        Bạn chưa đăng nhập
+      </a>
+    </ng-template>
+  </div>
+
+  <!-- Thêm công việc -->
+  <div class="flex justify-end mb-4">
+    <a
+      routerLink="/create"
+      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    >
+      + Thêm công việc mới
+    </a>
+  </div>
+
+  <!-- Danh sách công việc -->
+  <ul class="space-y-2">
+    <li
+      *ngFor="let task of tasks"
+      class="flex justify-between items-center bg-white p-4 rounded shadow"
+    >
+      <div>
+        <p
+          class="text-lg font-medium"
+          [class.line-through]="task.completed"
+        >
+          {{ task.title }}
+        </p>
+      </div>
+      <div class="flex gap-3 text-sm">
+        <button
+          class="text-green-600 hover:text-green-800"
+          (click)="toggleTask(task)"
+        >
+          Xong
+        </button>
+        <button
+          class="text-blue-600 hover:text-blue-800"
+          (click)="editTask(task)"
+        >
+          Sửa
+        </button>
+        <button
+          class="text-red-600 hover:text-red-800"
+          (click)="deleteTask(task.id)"
+        >
+          Xoá
+        </button>
+      </div>
+      <div class="text-xs text-gray-500">
+      🕒 Tạo: {{ task.created_at | date: 'short' }}
+      <span *ngIf="task.completed_at"> | ✅ Hoàn thành: {{ task.completed_at | date: 'short' }}</span>
+    </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,14 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
+  <h2 class="text-2xl font-bold mb-4 text-center">Đăng ký</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <input type="email" formControlName="email" placeholder="Email"
+      class="w-full px-4 py-2 border rounded" />
+    <input type="password" formControlName="password" placeholder="Mật khẩu"
+      class="w-full px-4 py-2 border rounded" />
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Đăng ký</button>
+  </form>
+  <p class="mt-4 text-center text-sm">
+    Đã có tài khoản?
+    <a routerLink="/login" (click)="login()" class="text-blue-500 hover:underline">Đăng nhập</a>
+  </p>
+</div>
